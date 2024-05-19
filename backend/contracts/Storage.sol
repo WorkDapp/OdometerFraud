@@ -1,7 +1,10 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.24;
+pragma solidity 0.8.24;
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+
+error VehiculeStore();
+error NoVehicule();
 
 contract Storage is Ownable {
     struct VehicleData {
@@ -9,23 +12,37 @@ contract Storage is Ownable {
         uint256 timestamp;
     }
 
-    mapping(bytes32 => address) vinToAddress;
-    mapping(address => VehicleData) vehicleData;
+    mapping(string => address) private vinToAddress;
+    mapping(address => VehicleData[]) private vehicleData;
+    
+    constructor() Ownable(msg.sender) {
 
-    constructor(address _owner) Ownable(_owner) {}
+    }
 
     function storeVehicule(
-        bytes memory _vin,
+        string memory _vin,
         address addressVehicule
     ) public onlyOwner {
-        vinToAddress[keccak256(_vin)] = addressVehicule;
+
+
+        if (vinToAddress[_vin] != address(0)){
+            revert VehiculeStore();
+        }
+        vinToAddress[_vin] = addressVehicule;
     }
 
-    function storeData(uint256 _mileage, uint256 _timestamp) public {
-        vehicleData[msg.sender] = VehicleData(_mileage, _timestamp);
+    function storeData(uint256 _mileage) external {
+        vehicleData[msg.sender].push(VehicleData(_mileage, block.timestamp));
     }
-    function getMileageByVIN(bytes32 _vin) public view returns (uint256) {
+
+    function getMileageByVIN(string memory _vin) public view returns (VehicleData[] memory) {
+
+
         address vehicleAddress = vinToAddress[_vin];
-        return vehicleData[vehicleAddress].mileage;
+
+        if (vehicleAddress == address(0)){
+            revert NoVehicule();
+        }
+        return vehicleData[vehicleAddress];
     }
 }
