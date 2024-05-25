@@ -9,7 +9,7 @@ const Footer = () => {
       alignItems="center"
       p="2rem"
     >
-      <Text>all right reserved &copy;
+      <Text>Anti-Fraud Corporate - Business Angel : Sam Altman - No copyrights &copy;
         {new Date().getFullYear()}
       </Text>
 

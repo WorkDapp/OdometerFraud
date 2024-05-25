@@ -41,7 +41,7 @@ const Enregistrement = () => {
 
   return (
     
-    <Flex direction="column" justify="center" align="center">
+    <Flex flex='1' direction="column" justify="center" align="center" >
       <Text p="4rem" bgGradient='linear(to-r, #bae5fc,  #44a06e )'
       bgClip='text'
       fontSize='6xl'

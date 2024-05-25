@@ -6,7 +6,9 @@ import { Alert, AlertIcon } from "@chakra-ui/react";
 const Information = ({ hash, isConfirming, isConfirmed, error }) => {
     
   return (
-    <>
+    <FLex
+    flex='1'
+    >
     
 
     {isConfirming &&
@@ -32,7 +34,7 @@ const Information = ({ hash, isConfirming, isConfirmed, error }) => {
 
 
 
-    </>
+    </Flex>
   )
 }
 

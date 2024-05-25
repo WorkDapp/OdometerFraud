@@ -9,8 +9,9 @@ import { useAccount } from "wagmi";
 export default function Home() {
 
   return (
-    <Box
-    w='100%' h='100%' bgGradient='linear(to-bl, #eaf9f1,  #f8e2f6 )'
+    <Flex
+      flex='1'
+      bgGradient='linear(to-bl, #eaf9f1,  #f8e2f6 )'
     >
       <Text 
       bgGradient='linear(to-r, #bae5fc,  #44a06e )'
@@ -23,7 +24,7 @@ export default function Home() {
       >
         Application decentralisée pour la vente de véhicule d'occasion
       </Text>
-    </Box>
+    </Flex>
 
   );
 }

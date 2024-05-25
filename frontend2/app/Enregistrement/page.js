@@ -13,13 +13,13 @@ export default function Home() {
   const { address, isConnected } = useAccount();
 
   return (
-    <Flex>
+    <>
       {isConnected ? (
         <Enregistrement />
       ) : (
 
         <NotConnected />
       )}
-    </Flex>
+    </>
   );
 }
