@@ -7,12 +7,13 @@ error VehiculeStore();
 error NoVehicule();
 
 contract Storage is Ownable {
+    
     struct VehicleData {
         uint256 mileage;
         uint256 timestamp;
     }
 
-    mapping(string => address) private vinToAddress;
+    mapping(bytes32 => address) private vinToAddress;
     mapping(address => VehicleData[]) private vehicleData;
     
     constructor() Ownable(msg.sender) {
@@ -24,11 +25,11 @@ contract Storage is Ownable {
         address addressVehicule
     ) public onlyOwner {
 
-
-        if (vinToAddress[_vin] != address(0)){
+        bytes32 hashVin = keccak256(abi.encodePacked(_vin));
+        if (vinToAddress[hashVin] != address(0)){
             revert VehiculeStore();
         }
-        vinToAddress[_vin] = addressVehicule;
+        vinToAddress[hashVin] = addressVehicule;
     }
 
     function storeData(uint256 _mileage) external {
@@ -37,12 +38,19 @@ contract Storage is Ownable {
 
     function getMileageByVIN(string memory _vin) public view returns (VehicleData[] memory) {
 
-
-        address vehicleAddress = vinToAddress[_vin];
+        bytes32 hashVin = keccak256(abi.encodePacked(_vin));
+        address vehicleAddress = vinToAddress[hashVin];
 
         if (vehicleAddress == address(0)){
             revert NoVehicule();
         }
+        return vehicleData[vehicleAddress];
+    }
+    function getVehicleAddressByVINHash(bytes32 hashVin) public view returns (address) {
+        return vinToAddress[hashVin];
+    }
+
+    function getVehicleDataByAddress(address vehicleAddress) public view returns (VehicleData[] memory) {
         return vehicleData[vehicleAddress];
     }
 }
