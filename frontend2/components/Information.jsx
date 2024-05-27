@@ -1,12 +1,12 @@
 'use client'
 
-import { Alert, AlertIcon } from "@chakra-ui/react";
+import { Alert, AlertIcon, Flex } from "@chakra-ui/react";
 
 
 const Information = ({ hash, isConfirming, isConfirmed, error }) => {
     
   return (
-    <FLex
+    <Flex
     flex='1'
     >
     

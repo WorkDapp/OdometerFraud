@@ -14,12 +14,8 @@ export default function Home() {
 
   return (
         <>
-      {isConnected ? (
         <Search />
-      ) : (
-
-        <NotConnected />
-      )}
+     
       </>
   );
 }
