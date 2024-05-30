@@ -176,7 +176,7 @@ contract = web3.eth.contract(address=contract_address, abi=abi)
 public_key = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8"
 private_key = "0x59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d"
 
-for i in range(1000, 5001, 1000):
+for i in range(5001, 10001, 1000):
     # Construire la transaction
     transaction = contract.functions.storeData(i).build_transaction({
         'from': public_key,
@@ -195,8 +195,4 @@ for i in range(1000, 5001, 1000):
     receipt = web3.eth.wait_for_transaction_receipt(tx_hash)
     print(f'Transaction {i} minée: {receipt.transactionHash.hex()}')
 
-# Vérifier que le kilométrage a bien été stocké
-print("Récupération....")
 
-resultat = contract.functions.getMileageByVIN("123").call()
-print(f'The saved number is: {resultat}')

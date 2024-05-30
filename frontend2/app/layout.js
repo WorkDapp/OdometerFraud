@@ -15,11 +15,10 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 
-const WALLET_CONNECT = process.env.NEXT_PUBLIC_WALLET_CONNECT || "";
 
 const config = getDefaultConfig({
   appName: 'My RainbowKit App',
-  projectId: WALLET_CONNECT,
+  projectId: 'cc9d5ebd580cd9f2af4056edfb834574',
   chains: [hardhat, sepolia],
   ssr: true, // If your dApp uses server side rendering (SSR)
 });
